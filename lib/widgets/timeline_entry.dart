@@ -47,6 +47,7 @@ class TimelineEntry extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
+                behavior: hasDescription ? HitTestBehavior.opaque : HitTestBehavior.deferToChild,
                 onTap: hasDescription
                     ? () => ref.read(cvProvider.notifier).toggleEntry(index)
                     : null,
