@@ -62,6 +62,11 @@ class CVTab extends ConsumerWidget {
               icon: Icons.location_on,
               text: '102 Quai Pierre Scize, 69005 Lyon',
             ),
+            const InfoRow(
+              icon: Icons.code,
+              text: 'github.com/TinyMiniPotato',
+              url: 'https://github.com/TinyMiniPotato',
+            ),
             const SizedBox(height: 24),
 
             // Compétences
