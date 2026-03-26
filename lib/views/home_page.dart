@@ -22,7 +22,6 @@ class HomePage extends ConsumerWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(tr('app_title')),
           actions: [
             IconButton(
               icon: const Icon(Icons.picture_as_pdf),
