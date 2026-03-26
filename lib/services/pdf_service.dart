@@ -1,20 +1,22 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/experience.dart';
 import '../models/skill.dart';
 
 class PdfService {
-  static Future<void> exportCv(BuildContext context) async {
+  // Utilisé par PdfPreview (retourne les bytes pour un format donné)
+  static Future<Uint8List> buildPdf(BuildContext context, PdfPageFormat format) async {
     final tr = AppLocalizations.of(context).translate;
     final doc = pw.Document();
 
     doc.addPage(
       pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
+        pageFormat: format,
         margin: const pw.EdgeInsets.all(32),
         build: (context) => [
           // Header
@@ -78,10 +80,7 @@ class PdfService {
       ),
     );
 
-    await Printing.sharePdf(
-      bytes: await doc.save(),
-      filename: 'cv_gael_perillat.pdf',
-    );
+    return doc.save();
   }
 
   static String _resolvePeriod(String period, String Function(String) tr) {
@@ -170,7 +169,12 @@ class PdfService {
           pw.Text(period, style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey600)),
           if (description.isNotEmpty) ...[
             pw.SizedBox(height: 4),
-            pw.Text(description, style: const pw.TextStyle(fontSize: 10)),
+            ...description.split('•').map((item) => item.trim()).where((item) => item.isNotEmpty).map(
+              (item) => pw.Bullet(
+                text: item,
+                style: const pw.TextStyle(fontSize: 10),
+              ),
+            ),
           ],
         ],
       ),

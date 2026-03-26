@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
-import '../services/pdf_service.dart';
 import '../viewmodels/locale_viewmodel.dart';
+import 'pdf_preview_page.dart';
 import '../viewmodels/theme_viewmodel.dart';
 import 'cv_tab.dart';
 import 'widgets_tab.dart';
@@ -27,7 +27,10 @@ class HomePage extends ConsumerWidget {
             IconButton(
               icon: const Icon(Icons.picture_as_pdf),
               tooltip: tr('export_pdf'),
-              onPressed: () => PdfService.exportCv(context),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PdfPreviewPage()),
+              ),
             ),
             PopupMenuButton<String>(
               icon: const Icon(Icons.menu),
