@@ -38,7 +38,7 @@ class HomePage extends ConsumerWidget {
                   ref.read(themeProvider.notifier).toggle();
                 }
               },
-              itemBuilder: (context) => [
+              itemBuilder: (outerContext) => [
                 PopupMenuItem(
                   value: 'theme',
                   child: Row(
@@ -51,19 +51,24 @@ class HomePage extends ConsumerWidget {
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem(
+                  padding: EdgeInsets.zero,
                   child: PopupMenuButton<String>(
                     offset: const Offset(-150, 0),
                     onSelected: (lang) {
                       ref.read(localeProvider.notifier).setLocale(Locale(lang));
+                      Navigator.pop(outerContext);
                     },
-                    child: Row(
-                      children: [
-                        const Icon(Icons.language),
-                        const SizedBox(width: 12),
-                        Text(tr('language')),
-                        const Spacer(),
-                        const Icon(Icons.arrow_forward_ios, size: 16),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.language),
+                          const SizedBox(width: 12),
+                          Text(tr('language')),
+                          const Spacer(),
+                          const Icon(Icons.arrow_forward_ios, size: 16),
+                        ],
+                      ),
                     ),
                     itemBuilder: (context) => [
                       PopupMenuItem(
