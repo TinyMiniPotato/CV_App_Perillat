@@ -27,8 +27,7 @@ class CVTab extends ConsumerWidget {
                 children: [
                   const CircleAvatar(
                     radius: 50,
-                    backgroundColor: Colors.blue,
-                    child: Icon(Icons.person, size: 60, color: Colors.white),
+                    backgroundImage: AssetImage('assets/images/profile.jpg'),
                   ),
                   const SizedBox(height: 16),
                   const Text(
