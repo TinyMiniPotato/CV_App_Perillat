@@ -107,7 +107,9 @@ class HomePage extends ConsumerWidget {
               top: BorderSide(color: Colors.grey.withValues(alpha: 0.2), width: 1),
             ),
           ),
-          child: TabBar(
+          child: SafeArea(
+            top: false,
+            child: TabBar(
             tabs: [
               Tab(icon: const Icon(Icons.person), text: tr('cv_tab')),
               Tab(icon: const Icon(Icons.widgets), text: tr('widgets_tab')),
@@ -118,6 +120,7 @@ class HomePage extends ConsumerWidget {
               border: Border(bottom: BorderSide(color: Colors.blue, width: 2)),
             ),
             indicatorSize: TabBarIndicatorSize.tab,
+          ),
           ),
         ),
       ),
