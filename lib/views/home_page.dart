@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
 import '../viewmodels/locale_viewmodel.dart';
-import 'pdf_preview_page.dart';
 import '../viewmodels/theme_viewmodel.dart';
 import 'cv_tab.dart';
 import 'widgets_tab.dart';
@@ -23,16 +22,8 @@ class HomePage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            IconButton(
-              icon: const Icon(Icons.picture_as_pdf),
-              tooltip: tr('export_pdf'),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const PdfPreviewPage()),
-              ),
-            ),
             PopupMenuButton<String>(
-              icon: const Icon(Icons.menu),
+              icon: const Icon(Icons.settings_outlined),
               onSelected: (value) {
                 if (value == 'theme') {
                   ref.read(themeProvider.notifier).toggle();

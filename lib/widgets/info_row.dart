@@ -6,22 +6,37 @@ class InfoRow extends StatelessWidget {
   final String text;
   final String? url;
 
-  const InfoRow({super.key, required this.icon, required this.text, this.url});
+  /// When true, uses smaller icon/text suitable for sidebar layouts.
+  final bool compact;
+
+  const InfoRow({
+    super.key,
+    required this.icon,
+    required this.text,
+    this.url,
+    this.compact = false,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final iconSize = compact ? 16.0 : 20.0;
+    final fontSize = compact ? 12.0 : 16.0;
+    final verticalPad = compact ? 2.0 : 4.0;
+
     final content = Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: EdgeInsets.symmetric(vertical: verticalPad),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: Colors.grey),
-          const SizedBox(width: 12),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 16,
-              color: url != null ? Theme.of(context).colorScheme.primary : null,
-              decoration: url != null ? TextDecoration.underline : null,
+          Icon(icon, size: iconSize, color: Colors.grey),
+          SizedBox(width: compact ? 8 : 12),
+          Flexible(
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: fontSize,
+                color: url != null ? Theme.of(context).colorScheme.primary : null,
+                decoration: url != null ? TextDecoration.underline : null,
+              ),
             ),
           ),
         ],
